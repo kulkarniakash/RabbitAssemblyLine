@@ -13,9 +13,10 @@ public class PeelCollector : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "doughball")
+        if (collision.gameObject.tag == "doughball" && maker.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("peel_maker_off"))
         {
             doughball = collision.gameObject;
             // collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2();

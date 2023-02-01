@@ -62,21 +62,6 @@ public class FlourMachine : Machine
             state = 0;
             stopAnimation();
         }
-
-        Debug.Log("state " + state);
-
-        /*if (state > 0)
-        {
-            state--;
-            if (state > 0)
-            {
-                currentMaxTime = maxTimeBase / state;
-                GetComponent<Animator>().speed = state;
-            }
-        } else
-        {
-            stopAnimation();
-        }*/
     }
 
     public void spawnDumpling()

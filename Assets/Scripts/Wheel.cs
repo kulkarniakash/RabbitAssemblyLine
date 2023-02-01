@@ -19,7 +19,6 @@ public class Wheel : MonoBehaviour
     public void switchOn()
     {
         isOn = true;
-        Debug.Log("wheel name: " + gameObject.name);
         machine.hitMachine();
         animator.ResetTrigger("switch off");
         animator.SetTrigger("switch on");

@@ -9,6 +9,7 @@ public class PeelMaker : Machine
     public GameObject peelSpawner;
 
     private int speed;
+    private bool animationPlaying;
     enum MachineState
     {
         Off,
@@ -22,6 +23,7 @@ public class PeelMaker : Machine
     {
         state = MachineState.Off;
         speed = 1;
+        animationPlaying = false;
     }
 
     // Update is called once per frame
@@ -32,7 +34,6 @@ public class PeelMaker : Machine
 
     public override void hitMachine()
     {
-        Debug.Log("hit");
         state = MachineState.One;
     }
 
@@ -43,20 +44,18 @@ public class PeelMaker : Machine
 
     public void startAnimation()
     {
+        animationPlaying = true;
         GetComponent<Animator>().SetTrigger("switch on");
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.GetContact(0).normal.y < 0)
-        {
-            collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(speed, 0);
-        }
+        collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(speed, 0);
     }
 
     public override void feedMachine()
     {
-        if (!state.Equals(MachineState.Off))
+        if (!state.Equals(MachineState.Off) && !animationPlaying)
         {
             startAnimation();
         }
@@ -73,5 +72,6 @@ public class PeelMaker : Machine
     public void destroyDoughBall()
     {
         collector.destroyDoughBall();
+        animationPlaying = false;
     }
 }
